@@ -5,8 +5,6 @@ class BotPlugin(object):
 
     TRIGGER = None
 
-
-
     def exec_plugin(self, command):
         pass
 

@@ -47,18 +47,22 @@ class SlackHook:
             
     @profiler_logging
     def _parse_slack_output(self, rtm_output):
-        if len(rtm_output) != 0: logger.debug(rtm_output)
+        if len(rtm_output) != 0:
+            logger.debug(rtm_output)
         if rtm_output and len(rtm_output) > 0:
             for output in rtm_output:
-                if output['type'] == "message" and output['user'] != self._bot_id:
-                    return output['text'], output['channel'], output['user']
+                if "user" in output.keys():
+                    if output['type'] == "message" and output['user'] != self._bot_id:
+                        return output['text'], output['channel'], output['user']
         return None, None, None
     
     @profiler_logging
     def _handle_command(self, command, channel, user):
         logger.info("command was {0}, channel was {1}".format(command, channel))
-        response = ("<@{0}> ".format(user)) + self._command_parser.parse_command(command)
-        self._slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+        command_output = self._command_parser.parse_command(command)
+        if command_output:
+            response = ("<@{0}> ".format(user)) + command_output
+            self._slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
     @profiler_logging
     def shutdown(self):
