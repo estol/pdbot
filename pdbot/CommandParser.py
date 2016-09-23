@@ -16,8 +16,13 @@ class CommandParser:
             class_ = getattr(module, c)
             instance = class_()
             assert isinstance(instance, plugins.BotPlugin)
-            if instance.TRIGGER in command:
-                answer = instance.exec_plugin(command)
+            if isinstance(instance.TRIGGER, list):
+                for w in instance.TRIGGER:
+                    if w in command:
+                        answer = instance.exec_plugin(command)
+            else:
+                if instance.TRIGGER in command:
+                    answer = instance.exec_plugin(command)
         return answer
 
 
