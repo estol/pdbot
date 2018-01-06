@@ -12,7 +12,7 @@ class SlackHook:
     
     @profiler_logging
     def __init__(self):
-        self._token = os.environ.get("BOT_SLACK_TOKEN") or "xoxb-295087394756-oEA3psh25Mu1EpbdJTinwMUI"
+        self._token = os.environ.get("BOT_SLACK_TOKEN")
         self._slack_client = SlackClient(self._token)
         self._getBotId()
         self._at_bot = "<@" + self._bot_id + ">"
