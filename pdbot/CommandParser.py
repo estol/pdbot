@@ -1,5 +1,5 @@
-from pdbot import profiler_logging
-import pdbot.plugins as plugins
+from profiler_logging import profiler_logging
+import plugins as plugins
 
 
 from importlib import import_module

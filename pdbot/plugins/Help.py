@@ -1,7 +1,7 @@
 from importlib import import_module
 
-from pdbot import plugins
-from pdbot.plugins import BotPlugin
+import plugins
+from plugins import BotPlugin
 
 
 class Help(BotPlugin):

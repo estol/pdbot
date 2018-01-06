@@ -1,4 +1,4 @@
-from pdbot.plugins import BotPlugin
+from plugins import BotPlugin
 import re
 
 
